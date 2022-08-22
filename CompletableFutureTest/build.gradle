@@ -10,6 +10,11 @@ repositories {
 }
 
 dependencies {
+    def coroutine_version = '1.6.4'
+    /* coroutine */
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 
