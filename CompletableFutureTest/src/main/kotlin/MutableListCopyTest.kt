@@ -11,35 +11,40 @@ fun main(args: Array<String>) {
     })
     println("copyTestList.getTestList() : ${copyTestList.getTestList()}")
 
-    val newTestList = copyTestList.getTestList().map { test ->
+    val newTestList = copyTestList.getTestList()?.map { it?.copy() }
+    newTestList?.map { test ->
         test?.apply {
             message = "list"
         }
     }
     println("copyTestList.getTestList() : ${copyTestList.getTestList()}")
-    copyTestList.setTestList(newTestList)
+    if (newTestList != null) {
+        copyTestList.setTestList(newTestList)
+    }
     println("copyTestList.getTestList() : ${copyTestList.getTestList()}")
 
-    val testMutableList = copyTestList.getTestList().toMutableList()
-    val newTestMutableList = testMutableList.map { test ->
+    val testMutableList = copyTestList.getTestList()?.toMutableList()
+    val newTestMutableList = testMutableList?.map { test ->
         test?.apply {
             message = "mutable"
         }
     }
     println("copyTestList.getTestList() : ${copyTestList.getTestList()}")
-    copyTestList.setTestList(newTestMutableList)
+    if (newTestMutableList != null) {
+        copyTestList.setTestList(newTestMutableList)
+    }
     println("copyTestList.getTestList() : ${copyTestList.getTestList()}")
 }
 
 class MutableListCopyTest {
-    private val testList = mutableListOf<TestModel?>()
+    private var testList : List<TestModel?>? = null
 
     fun setTestList(list: List<TestModel?>) {
-        testList.clear()
-        testList.addAll(list)
+        testList = null
+        testList = list
     }
 
-    fun getTestList() : List<TestModel?> {
+    fun getTestList() : List<TestModel?>? {
         return testList
     }
 
